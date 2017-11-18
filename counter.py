@@ -1,8 +1,11 @@
 import sys
 import string
+import random
 
-# transform synthesized into counterexample search
-# in particular, flip the equality...
+# the worst code I've ever written
+
+# transform synthesized candidate program into counterexample search problem
+# in particular, we just flip the equality
 
 orig = sys.argv[1]
 model = sys.argv[2]
@@ -31,13 +34,14 @@ while True:
 
   # get box from model
   m = model.readline()
-  box = string.split(m, "[")[1]
-  box = string.split(box, "]")[0]
+  start = float(m.split("[")[1].split(",")[0])
+  stop = float(m.split("[")[1].split("]")[0].split(",")[1])
   
-  # get var from original
+  # get var from original (assuming model output preserves ordering!)
   var = string.split(v)[-1]
 
-  out.write("[" + box + "] " + var + "\n")
+  box = random.random() * (stop - start) + start
+  out.write("[" + str(box) + "," + str(box) + "] " + var + "\n")
 
 # finally, write new constraint
 c = orig.readline()
