@@ -4,6 +4,8 @@ DREAL="/home/penlu/Downloads/software/dreal3/bin/dReal"
 
 COUNTER=0
 
+mkdir -p exptest
+
 # generate first synth target by compiling sketch
 python dreal.py exptest/exptest.sk exptest/exptest${COUNTER}.dr
 
