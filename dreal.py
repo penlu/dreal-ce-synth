@@ -302,7 +302,7 @@ def generate_dreal(analytic, sketch):
     f.write("var:\n")
 
     # our function variable
-    f.write("[0, 5] X;\n")
+    f.write("[0, 1] X;\n")
 
     f.write("ctr:\n%s - ( %s ) = 0;\n" % (generate_analytic(analytic, 0), generate_sketch(f, sketch, 0)))
     

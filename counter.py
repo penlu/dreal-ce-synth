@@ -45,5 +45,5 @@ while True:
 
 # finally, write new constraint
 c = orig.readline()
-out.write(string.split(c, "=")[0] + " > 0.001;")
+out.write(string.split(c, "=")[0] + " > 0.002;")
 
