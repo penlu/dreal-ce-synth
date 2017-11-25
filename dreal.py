@@ -1,6 +1,6 @@
 
 # -----------------------------------------------------------------------------
-# sketching language for approximations
+# a compiler for a sketching language for approximations to dReal input format
 # -----------------------------------------------------------------------------
 
 tokens = (
@@ -297,24 +297,31 @@ def generate_dreal(analytic, sketch):
   print "sketch"
   print sketch
 
-  with open(sys.argv[2], "w") as f:
-    # variable section
-    f.write("var:\n")
-
-    # our function variable
-    f.write("[0, 1] X;\n")
-
-    f.write("ctr:\n%s - ( %s ) = 0;\n" % (generate_analytic(analytic, 0), generate_sketch(f, sketch, 0)))
+  a = generate_analytic(analytic, 0)
+  s = generate_sketch(outfile, sketch, 0) # outputs sketch vars
+  outfile.write("ctr:\n%s - ( %s ) = 0;\n" % (a, s))
     
 import sys
 import ply.yacc as yacc
 parser = yacc.yacc()
 
-
 if len(sys.argv) != 3:
   print "Usage: %s [sketch file] [output file]" % sys.argv[0]
   exit(0)
 
+outfile = open(sys.argv[2], "w")
+
 with open(sys.argv[1]) as f:
+  bounds = f.readline()
+
+  # variable section
+  outfile.write("var:\n")
+
+  # our function variable
+  outfile.write(bounds)
+
+  # parse rest of file as sketch
   s = f.read()
   parser.parse(s)
+
+outfile.close()
