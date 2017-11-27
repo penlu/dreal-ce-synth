@@ -170,6 +170,7 @@ def fresh(f):
   return v
 
 def generate_analytic(expr, prec):
+  prec = 100 # always parenthesize
   # leaf node
   if len(expr) == 1:
     if type(expr[0]) == type(0.): # number
@@ -221,6 +222,7 @@ def generate_analytic(expr, prec):
   raise Exception("expression undefined: %s" % str(expr))
       
 def generate_sketch(f, expr, prec):
+  prec = 100 # always parenthesize
   # leaf node
   if len(expr) == 1:
     if type(expr[0]) == type(0.): # number
@@ -299,7 +301,7 @@ def generate_dreal(analytic, sketch):
 
   a = generate_analytic(analytic, 0)
   s = generate_sketch(outfile, sketch, 0) # outputs sketch vars
-  outfile.write("ctr:\n%s - ( %s ) = 0;\n" % (a, s))
+  outfile.write("ctr:\nabs( %s - ( %s ) ) < 0.002;\n" % (a, s))
     
 import sys
 import ply.yacc as yacc

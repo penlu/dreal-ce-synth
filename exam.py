@@ -39,5 +39,7 @@ stop = float(x.split("[")[1].split("]")[0].split(",")[1])
 # finally, write new constraint
 # we select our X randomly from the found counterexample box
 select = random.random() * (stop - start) + start
-out.write(str(select).join(c.split("X")))
+#out.write(("( " + str(select) + " )").join(c.split("X")))
+#out.write(("( " + str(start) + " )").join(c.split("X")))
+out.write(("( " + str(stop) + " )").join(c.split("X")))
 

@@ -40,10 +40,14 @@ while True:
   # get var from original (assuming model output preserves ordering!)
   var = string.split(v)[-1]
 
+  # pick random value within box, since claim is all such are valid
   box = random.random() * (stop - start) + start
   out.write("[" + str(box) + "," + str(box) + "] " + var + "\n")
+  # just write both bounds as constraints
+  #out.write("[" + str(stop) + "," + str(start) + "] " + var + "\n")
 
 # finally, write new constraint
 c = orig.readline()
-out.write(string.split(c, "=")[0] + " > 0.002;")
+#out.write("abs( " + string.split(c, "<")[0] + ") > 0.002;\n")
+out.write(string.split(c, "<")[0] + "> 0.004;\n")
 
