@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DREAL="/home/penlu/Downloads/software/dreal3/bin/dReal"
+DREAL="/home/penlu/Downloads/software/dreal3/bin/dReal --delta"
 
 COUNTER=0
 
